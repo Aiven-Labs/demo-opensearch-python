@@ -7,8 +7,9 @@ Quickstart
 -----------
 
 To run those examples you need:
-- An OpenSearch® cluster. It can be `set it up manually <https://opensearch.org/downloads.html>`_ or you can use a fully managed service, such as `Aiven for OpenSearch <https://aiven.io/opensearch>`_.
-- `Python 3.8+ <https://www.python.org/downloads/>`_.
+
+* An OpenSearch® cluster. It can be `set it up manually <https://opensearch.org/downloads.html>`_ or you can use a fully managed service, such as `Aiven for OpenSearch <https://aiven.io/opensearch>`_.
+* `Python 3.7+ <https://www.python.org/downloads/>`_.
 
 Install all dependencies::
 
@@ -18,11 +19,12 @@ Install all dependencies::
 Structure of this repository
 ----------------------------
 
-`index.js` - function to load data to the cluster
+* ``index.js`` - load data to cluster functions
 
-`search.js` - examples of search queries
+* ``search.js`` - search queries examples
 
-`config.js` and `helpers.js` connection operation to the cluster
+* ``config.js`` and ``helpers.js`` - connection operation to the cluster
+
 
 Search examples
 ---------------
