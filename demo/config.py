@@ -8,6 +8,7 @@ import os
 from opensearchpy import OpenSearch, helpers
 from dotenv import load_dotenv
 from typing import Dict
+import click
 
 load_dotenv()
 INDEX_NAME = "epicurious-recipes"
@@ -34,11 +35,19 @@ def get_document(client, doc_id, doc_name):
         print("No document found.")
 
 
-def search_exact(args, client=client):
+def search_exact(args):
+    print(args)
+    field = args.field
+    value = args.value
     """Searching for exact matches of a value in a field."""
-    field = args.param1
-    value = args.param2
     query_body = {"query": {"term": {field: value}}}
+    print(query_body)
+    return query_body
+    # return client.search(index=INDEX_NAME, body=query_body)
+
+
+def search_client(query_body):
+    client = OpenSearch(SERVICE_URI, use_ssl=True)
     return client.search(index=INDEX_NAME, body=query_body)
 
 
@@ -114,7 +123,7 @@ def search_combined_queries(client):
     return client.search(index=INDEX_NAME, body=query_body)
 
 
-def send_data(client, data):
+def send_data(os_client, data):
     # Send data to OpenSearch
     response = helpers.bulk(os_client, load_data())
     print(f"Data sent to your OpenSearch with response: {response}")
@@ -123,9 +132,6 @@ def send_data(client, data):
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(description="Run search queries on OpenSearch")
-    parser.add_argument("")
-    FUNCTION_MAP = {"match": search_exact}
     # Connect with the cluster
     SERVICE_URI = os.getenv("SERVICE_URI")
     os_client = OpenSearch(SERVICE_URI, use_ssl=True)
@@ -133,17 +139,16 @@ def main():
     p = argparse.ArgumentParser()
     subparsers = p.add_subparsers()
 
-    option1_parser = subparsers.add_parser("match")
-    option1_parser.add_argument("param1")
-    option1_parser.add_argument("param2")
-    option1_parser.set_defaults(func=FUNCTION_MAP["search_exact"])
+    search_exact = subparsers.add_parser("match")
+    search_exact.add_argument("field")
+    search_exact.add_argument("value")
+    search_exact.set_defaults(func=search_exact)
 
     args = p.parse_args()
-    args.func(args, client=os_client)
+    args.func(args)
+    print(args)
 
-    resp = search_match(os_client, "title", "Tomato garlic soup with dill")
-
-    pprint.pprint(resp, width=1)
+    search_exact(args)
 
 
 if __name__ == "__main__":
