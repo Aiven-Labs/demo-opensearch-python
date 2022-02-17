@@ -1,4 +1,4 @@
-OpenSearch search queries with Python
+OpenSearch® search queries with Python
 =====================================
 
 This repository contains code examples related to <Add devportal page>.
