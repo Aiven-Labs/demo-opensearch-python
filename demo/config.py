@@ -3,6 +3,7 @@
 
 import json
 from logging import exception
+from operator import index
 import os
 from opensearchpy import OpenSearch, helpers
 from dotenv import load_dotenv
@@ -13,7 +14,7 @@ INDEX_NAME = "epicurious-recipes"
 
 
 def load_data():
-    """Yields the data to be sent to cluster."""
+    """Yields data from json file."""
     with open("full_format_recipes.json", "r") as f:
         data = json.load(f)
         for recipe in data:
@@ -33,8 +34,10 @@ def get_document(client, doc_id, doc_name):
         print("No document found.")
 
 
-def search_exact(client, field, value):
+def search_exact(args, client=client):
     """Searching for exact matches of a value in a field."""
+    field = args.param1
+    value = args.param2
     query_body = {"query": {"term": {field: value}}}
     return client.search(index=INDEX_NAME, body=query_body)
 
@@ -46,8 +49,8 @@ def search_range(client, field, gte, lte):
     return client.search(index=INDEX_NAME, body=query_body)
 
 
-def search_fuzzy(field, value, fuzziness):
-    """Specifying fuzziness to account for typos and misspelling."""
+def search_fuzzy(client, field, value, fuzziness):
+    """Search by specifying fuzziness to account for typos and misspelling."""
     print(f"Search for {value} in the {field} with fuzziness set to {fuzziness}")
     query_body = {
         "query": {
@@ -62,15 +65,31 @@ def search_fuzzy(field, value, fuzziness):
     return client.search(index=INDEX_NAME, body=query_body)
 
 
-def search_match(field, query):
-    """Finding matches sorted by relevance."""
+def search_match(client, field, query):
+    """Perform search by relevance for certain field and query."""
     print(f"Searching for {query} in the field {field}")
     query_body = {"query": {"match": {field: query}}}
     return client.search(index=INDEX_NAME, body=query_body)
 
 
+def search_query_string(client, field, query, size):
+    """Search by using operators with query string and size parameter"""
+    print(
+        f"Searching for ${query} in the field ${field} and returning maximum ${size} results"
+    )
+    query_body = {
+        "query": {
+            "query_string": {
+                "query": "(new york city) OR (big apple)",
+                "default_field": "content",
+            }
+        }
+    }
+    return client.search(index=INDEX_NAME, body=query_body, size=size)
+
+
 def search_slop(client, field, query, slop):
-    """Specifying a slop - a distance between search word"""
+    """Search by specifying a slop - a distance between search word"""
     print(f"Searching for {query} with slop value {slop} in the field {field}")
     query_body = {
         "query": {"match_phrase": {field: {"query": query, "analyzer": slop}}}
@@ -78,17 +97,53 @@ def search_slop(client, field, query, slop):
     return client.search(index=INDEX_NAME, body=query_body)
 
 
+def search_combined_queries(client):
+    query_body = {
+        "query": {
+            "bool": {
+                "must": {"match": {"categories": "Quick & Easy"}},
+                "must_not": {"match": {"ingredients": "garlic"}},
+                "filter": [
+                    {"range": {"protein": {"gte": 5}}},
+                    {"range": {"sodium": {"lte": 50}}},
+                ],
+                "must_not": {"match": {"ingredients": "garlic"}},
+            }
+        }
+    }
+    return client.search(index=INDEX_NAME, body=query_body)
+
+
+def send_data(client, data):
+    # Send data to OpenSearch
+    response = helpers.bulk(os_client, load_data())
+    print(f"Data sent to your OpenSearch with response: {response}")
+
+
 def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Run search queries on OpenSearch")
+    parser.add_argument("")
+    FUNCTION_MAP = {"match": search_exact}
     # Connect with the cluster
     SERVICE_URI = os.getenv("SERVICE_URI")
-    OS_CLIENT = OpenSearch(SERVICE_URI, use_ssl=True)
+    os_client = OpenSearch(SERVICE_URI, use_ssl=True)
 
-    # Send data to OpenSearch
-    try:
-        response = helpers.bulk(OS_CLIENT, load_data())
-        print(f"Data sent to your OpenSearch with response: {response}")
-    except Exception as e:
-        print(f"Error: {e}")
+    p = argparse.ArgumentParser()
+    subparsers = p.add_subparsers()
+
+    option1_parser = subparsers.add_parser("match")
+    option1_parser.add_argument("param1")
+    option1_parser.add_argument("param2")
+    option1_parser.set_defaults(func=FUNCTION_MAP["search_exact"])
+
+    args = p.parse_args()
+    args.func(args, client=os_client)
+
+    resp = search_match(os_client, "title", "Tomato garlic soup with dill")
+
+    pprint.pprint(resp, width=1)
 
 
 if __name__ == "__main__":
