@@ -8,7 +8,7 @@ Quickstart
 
 To run those examples you need:
 
-* An OpenSearch® cluster. It can be `set it up manually <https://opensearch.org/downloads.html>`_ or you can use a fully managed service, such as `Aiven for OpenSearch <https://aiven.io/opensearch>`_.
+* An OpenSearch® cluster. It can be `set it up manually <https://opensearch.org/downloads.html>`_ or you can use a fully managed service, such as `Aiven for OpenSearch® <https://aiven.io/opensearch>`_.
 * `Python 3.7+ <https://www.python.org/downloads/>`_.
 
 Install all dependencies::
