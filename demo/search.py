@@ -8,13 +8,10 @@ import typer
 from dotenv import load_dotenv
 from opensearchpy import OpenSearch
 
+from config import INDEX_NAME, SERVICE_URI, client
+
 
 app = typer.Typer()
-
-load_dotenv()
-INDEX_NAME = "epicurious-recipes"
-SERVICE_URI = os.getenv("SERVICE_URI")
-client = OpenSearch(SERVICE_URI, use_ssl=True)
 
 
 @app.command("range")
