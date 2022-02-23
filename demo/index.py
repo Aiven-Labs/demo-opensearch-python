@@ -1,7 +1,11 @@
 """
-Functions related to index operations:
-send data to cluster, delete index, 
-get cluster info and get mapping
+This file contains index operations.
+Run the following to check the available methods:
+
+.. code-block:: shellpython
+
+   python index.py --help
+
 """
 import json
 from pprint import pprint
@@ -53,7 +57,6 @@ def get_mapping():
 
     # list of all the cluster's indices
     indices = client.indices.get_alias("*").keys()
-    print(f"All indices: {indices}")
 
     # Example:
     # dict_keys(['.kibana_1', 'epicurious-recipes'])
@@ -62,10 +65,10 @@ def get_mapping():
 
     # Find index doc_type
     doc_type = list(mapping_data[INDEX_NAME]["mappings"].keys())[0]
-    print("doc_type: {doc_type}")
 
     schema = mapping_data[INDEX_NAME]["mappings"][doc_type]
-    print(f"Fields: {list(schema.keys())} \n")
+    pprint(list(schema.keys()))
+    print("\n")
     pprint(schema, width=80, indent=0)
 
 

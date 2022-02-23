@@ -1,12 +1,16 @@
-# full_format_recipes.json taken from
-# https://www.kaggle.com/hugodarwood/epirecipes?select=full_format_recipes.json
+"""
+This file contains code samples for search queries.
+Run the following to check the available methods:
 
-import os
+.. code-block:: shellpython
+
+   python search.py --help
+
+"""
 import pprint
+from operator import imod
 
 import typer
-from dotenv import load_dotenv
-from opensearchpy import OpenSearch
 
 from config import INDEX_NAME, SERVICE_URI, client
 
@@ -35,7 +39,8 @@ def search_fuzzy(field, value, fuzziness):
             }
         }
     }
-    return query_body
+    resp = client.search(index=INDEX_NAME, body=query_body)
+    pprint.pprint(resp, width=100, indent=1)
 
 
 @app.command("match")

@@ -1,3 +1,3 @@
 from setuptools import setup
 
-setup(name="opensearch-python-demo", packages=["opensearch-python-demo"])
+setup(name="opensearch_python_demo", packages=["opensearch-python-demo"])
