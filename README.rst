@@ -1,5 +1,5 @@
 OpenSearch® search queries with Python
-=====================================
+======================================
 
 This repository contains code examples related to <Add devportal page>.
 
@@ -16,14 +16,16 @@ Install all dependencies::
     pip install -r requirements.txt
 
 
-Structure of this repository
-----------------------------
+Repository structure
+--------------------
 
-* ``index.js`` - load data to cluster functions
+* ``index.py`` - load data to cluster functions
 
-* ``search.js`` - search queries examples
+* ``search.py`` - search queries examples
 
-* ``config.js`` and ``helpers.js`` - connection operation to the cluster
+* ``config.py`` - connection operation to the cluster
+
+* ``helpers.js`` - response handler of search requests
 
 
 Search examples
@@ -37,7 +39,17 @@ Find the arguments to be passed to a certain function by running::
     python search.py OPTION --help
 
 
-OPTION can be one of the following terms: match, fuzzy, term, slop, range, query-string, slop, combine.
+OPTION can be:
+* match
+* multi-match
+* match-phrase
+* fuzzy
+* term 
+* slop
+* range
+* query-string
+* slop
+* combine
 
 Do you have questions?
 ----------------------
@@ -53,4 +65,4 @@ This work is licensed under the Apache License, Version 2.0. Full license text i
 Trademarks
 ----------
 
-OpenSearch, NodeJs and npm are trademarks and property of their respective owners. All product and service names used in this website are for identification purposes only and do not imply endorsement.
+OpenSearch, Python are trademarks and property of their respective owners. All product and service names used in this website are for identification purposes only and do not imply endorsement.
