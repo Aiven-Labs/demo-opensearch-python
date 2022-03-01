@@ -7,13 +7,26 @@ Quickstart
 -----------
 
 To run those examples you need:
-
-* An OpenSearch® cluster. It can be `set it up manually <https://opensearch.org/downloads.html>`_ or you can use a fully managed service, such as `Aiven for OpenSearch® <https://aiven.io/opensearch>`_.
 * `Python 3.7+ <https://www.python.org/downloads/>`_.
+* An OpenSearch® cluster. It can be `set it up manually <https://opensearch.org/downloads.html>`_ or you can use a fully managed service, such as `Aiven for OpenSearch® <https://aiven.io/opensearch>`_.
+* OpenSearch cluster `Service URI`
+
+Dependencies
+''''''''''''
 
 Install all dependencies::
 
     pip install -r requirements.txt
+
+Service URI
+'''''''''''
+To connect with your cluster, you need the **Service URI** of your OpenSearch cluster. You can find the connection details in the section **Overview** on `Aiven web console <https://console.aiven.io>`_. Notice that ``service_uri`` contains credentials; therefore, should be treated with care.
+
+For security reasons is recommended to use environment variables to save your credential information. We are using ``dotenv`` `Python library <https://pypi.org/project/python-dotenv/>`_ to manage our environment variables, and using our service uri information as ``SERVICE_URI`` variable.
+
+Replace your ``SERVICE_URI`` on `.env` file.
+
+SERVICE_URI=<https://<user>:<password>@<host>:<port>
 
 
 Repository structure
