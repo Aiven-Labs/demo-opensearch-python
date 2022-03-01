@@ -27,7 +27,7 @@ def search_match(field: str, query: str, operator: str = "or") -> None:
     log_titles(resp)
 
 
-@app.command("multi_match")
+@app.command("multi-match")
 def search_multi_match(fields: List[str], query: str) -> None:
     """Perform search by relevance for certain field and query."""
     typer.echo(f"Searching for {query} in the field {fields} \n")
@@ -102,15 +102,15 @@ def search_slop(field, query, slop):
 
 @app.command("combine")
 def search_combined_queries():
+    """Search by using boolean logic with multiple search queries combined"""
+    typer.echo(
+        f"Searching for:\n must match category: Quick & Easy;\
+         \n must not match ingredients: garlic"
+    )
     query_body = {
         "query": {
             "bool": {
                 "must": {"match": {"categories": "Quick & Easy"}},
-                "must_not": {"match": {"ingredients": "garlic"}},
-                "filter": [
-                    {"range": {"protein": {"gte": 5}}},
-                    {"range": {"sodium": {"lte": 50}}},
-                ],
                 "must_not": {"match": {"ingredients": "garlic"}},
             }
         }
