@@ -22,7 +22,7 @@ Repository structure
 * `config.py <https://github.com/aiven/demo-opensearch-python/blob/main/config.py>`_, basic information to connect to the cluster
 * `index.py <https://github.com/aiven/demo-opensearch-python/blob/main/index.py>`_, contains methods that manipulate the index
 * `search.py <https://github.com/aiven/demo-opensearch-python/blob/main/search.py>`_, contains search queries methods
-* `helpers.js <https://github.com/aiven/demo-opensearch-python/blob/main/helpers.py>`_, response handler of search requests
+* `helpers.py <https://github.com/aiven/demo-opensearch-python/blob/main/helpers.py>`_, response handler of search requests
 
 Search examples
 ---------------
