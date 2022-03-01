@@ -36,16 +36,15 @@ Find the arguments to be passed to a certain function by running::
 
 
 OPTION can be:
-* match
-* multi-match
-* match-phrase
-* fuzzy
-* term 
-* slop
-* range
-* query-string
-* slop
-* combine
+* `match <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match>`_
+* `multi-match <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match>`_
+* `match-phrase <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match-phrase>`_
+* `fuzzy <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#options>`_
+* `term <https://opensearch.org/docs/latest/opensearch/query-dsl/term/#term>`_
+* `slop <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#options>`_
+* `range <https://opensearch.org/docs/latest/opensearch/query-dsl/term/#range>`_
+* `query-string <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#query-string>`_
+* `combine <https://opensearch.org/docs/latest/opensearch/query-dsl/bool/>`_
 
 Do you have questions?
 ----------------------
