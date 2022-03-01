@@ -51,13 +51,13 @@ Install all dependencies::
 
 Service URI
 '''''''''''
-To connect with your cluster, you need the **Service URI** of your OpenSearch cluster. You can find the connection details in the section **Overview** on `Aiven web console <https://console.aiven.io>`_. Notice that ``service_uri`` contains credentials; therefore, should be treated with care.
+To connect with your cluster, you need the **Service URI** of your OpenSearch cluster. You can find the connection details in the section **Overview** on `Aiven web console <https://console.aiven.io>`_. Notice that ``service_uri`` contains credentials; therefore, should be treated with care. 
 
-For security reasons is recommended to use environment variables to save your credential information. We are using ``dotenv`` `Python library <https://pypi.org/project/python-dotenv/>`_ to manage our environment variables, and using our service uri information as ``SERVICE_URI`` variable.
+This project uses ``dotenv`` `Python library <https://pypi.org/project/python-dotenv/>`_ to manage the environment variables.
 
-Replace your ``SERVICE_URI`` on `.env` file.
+Replace your ``SERVICE_URI`` on `.env` file with yours as string::
 
-SERVICE_URI=<https://<user>:<password>@<host>:<port>
+    SERVICE_URI=<https://<user>:<password>@<host>:<port>
 
 
 Do you have questions?
