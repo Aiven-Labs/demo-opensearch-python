@@ -3,6 +3,37 @@ OpenSearch® search queries with Python
 
 This repository contains code examples related to <Add devportal page>.
 
+Repository structure
+--------------------
+
+* `config.py <https://github.com/aiven/demo-opensearch-python/blob/main/config.py>`_, basic information to connect to the cluster
+* `index.py <https://github.com/aiven/demo-opensearch-python/blob/main/index.py>`_, contains methods that manipulate the index
+* `search.py <https://github.com/aiven/demo-opensearch-python/blob/main/search.py>`_, contains search queries methods
+* `helpers.py <https://github.com/aiven/demo-opensearch-python/blob/main/helpers.py>`_, response handler of search requests
+
+Search examples
+---------------
+The available search options can be found by using help command::
+
+    python search.py --help
+
+Find the arguments to be passed to a certain function by running::
+
+    python search.py OPTION --help
+
+
+OPTION can be:
+
+* `match <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match>`_
+* `multi-match <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match>`_
+* `match-phrase <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match-phrase>`_
+* `fuzzy <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#options>`_
+* `term <https://opensearch.org/docs/latest/opensearch/query-dsl/term/#term>`_
+* `slop <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#options>`_
+* `range <https://opensearch.org/docs/latest/opensearch/query-dsl/term/#range>`_
+* `query-string <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#query-string>`_
+* `combine <https://opensearch.org/docs/latest/opensearch/query-dsl/bool/>`_
+
 Quickstart
 -----------
 
@@ -28,36 +59,6 @@ Replace your ``SERVICE_URI`` on `.env` file.
 
 SERVICE_URI=<https://<user>:<password>@<host>:<port>
 
-
-Repository structure
---------------------
-
-* `config.py <https://github.com/aiven/demo-opensearch-python/blob/main/config.py>`_, basic information to connect to the cluster
-* `index.py <https://github.com/aiven/demo-opensearch-python/blob/main/index.py>`_, contains methods that manipulate the index
-* `search.py <https://github.com/aiven/demo-opensearch-python/blob/main/search.py>`_, contains search queries methods
-* `helpers.py <https://github.com/aiven/demo-opensearch-python/blob/main/helpers.py>`_, response handler of search requests
-
-Search examples
----------------
-The available search options can be found by using help command::
-
-    python search.py --help
-
-Find the arguments to be passed to a certain function by running::
-
-    python search.py OPTION --help
-
-
-OPTION can be:
-* `match <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match>`_
-* `multi-match <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match>`_
-* `match-phrase <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#match-phrase>`_
-* `fuzzy <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#options>`_
-* `term <https://opensearch.org/docs/latest/opensearch/query-dsl/term/#term>`_
-* `slop <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#options>`_
-* `range <https://opensearch.org/docs/latest/opensearch/query-dsl/term/#range>`_
-* `query-string <https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/#query-string>`_
-* `combine <https://opensearch.org/docs/latest/opensearch/query-dsl/bool/>`_
 
 Do you have questions?
 ----------------------
