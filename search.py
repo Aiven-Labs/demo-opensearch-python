@@ -122,7 +122,7 @@ def search_combined_queries():
 @app.command("term")
 def search_exact(field: str, value: int):
     """Searching for exact matches of a value in a field."""
-    typer.echo(f"Searching for exact value {query} in the field {field}")
+    typer.echo(f"Searching for exact value {value} in the field {field}")
     query_body = {"query": {"term": {field: value}}}
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)

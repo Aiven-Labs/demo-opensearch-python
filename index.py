@@ -19,8 +19,8 @@ from config import INDEX_NAME, client
 app = typer.Typer()
 
 
-@app.command("send-data")
-def send_data():
+@app.command("load-data")
+def load_data():
     """Send multiple data to an OpenSearch client."""
 
     def load_data():
