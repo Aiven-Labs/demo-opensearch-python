@@ -7,8 +7,6 @@ Run the following to check the available methods:
    python search.py --help
 
 """
-from operator import imod
-
 import typer
 
 from config import INDEX_NAME, SERVICE_URI, client
@@ -16,7 +14,6 @@ from helpers import log_titles
 from typing import List
 
 app = typer.Typer()
-
 
 @app.command("match")
 def search_match(field: str, query: str, operator: str = "or") -> None:
