@@ -11,6 +11,10 @@ Repository structure
 * `search.py <https://github.com/aiven/demo-opensearch-python/blob/main/search.py>`_, contains search queries methods
 * `helpers.py <https://github.com/aiven/demo-opensearch-python/blob/main/helpers.py>`_, response handler of search requests
 
+Dataset
+-------
+You can download the dataset `from Kaggle recipe dataset <https://www.kaggle.com/hugodarwood/epirecipes?select=full_format_recipes.json>`_, and save the ``full_format_recipes.json`` in the current folder of the `demo <https://github.com/aiven/demo-opensearch-python>`_.
+
 Search examples
 ---------------
 The available search options can be found by using help command::
