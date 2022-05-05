@@ -1,7 +1,7 @@
 OpenSearch® search queries with Python
 ======================================
 
-This repository contains code examples related to `OpenSearch with Python` <https://developer.aiven.io/docs/products/opensearch/howto/opensearch-search-and-python.html>`_.
+This repository contains code examples related to `OpenSearch with Python queries <https://developer.aiven.io/docs/products/opensearch/howto/opensearch-search-and-python.html>`_.
 
 Repository structure
 --------------------
