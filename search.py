@@ -35,7 +35,7 @@ def search_multi_match(fields: List[str], query: str) -> None:
 
 @app.command("match-phrase")
 def search_match_phrase(field, query):
-    """Search by with match phrase for specific phrases in a field."""
+    """Search by match phrase for specific phrases in a field."""
     typer.echo(f"Searching for {query} in the field {field}")
     query_body = {"query": {"match_phrase": {field: {"query": query}}}}
     resp = client.search(index=INDEX_NAME, body=query_body)
@@ -44,6 +44,7 @@ def search_match_phrase(field, query):
 
 @app.command("range")
 def search_range(field: str, gte, lte) -> None:
+    """Search by specifying a range of values for a field"""
     typer.echo(f"Searching for values in the {field} ranging from {gte} to {lte} \n")
     query_body = {"query": {"range": {field: {"gte": gte, "lte": lte}}}}
     resp = client.search(index=INDEX_NAME, body=query_body)
