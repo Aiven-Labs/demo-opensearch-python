@@ -9,7 +9,7 @@ Run the following to check the available methods:
 """
 import typer
 
-from config import INDEX_NAME, SERVICE_URI, create_client
+from config import INDEX_NAME, create_client
 from helpers import log_titles
 from typing import List
 
