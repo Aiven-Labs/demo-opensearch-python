@@ -5,13 +5,18 @@ import os
 
 from dotenv import load_dotenv
 from opensearchpy import OpenSearch
+from customized_exceptions import InvalidServiceURI
 
-load_dotenv()
 
-INDEX_NAME = "epicurious-recipes"
-SERVICE_URI = os.getenv("SERVICE_URI")
-if SERVICE_URI == "https://user:pass@hostname:port" or SERVICE_URI is None:
-    print(f"Update SERVICE_URI to your cluster uri. Current value for SERVICE_URI={SERVICE_URI}")
-    exit(-1)
+INDEX_NAME = "recipes"
 
-client = OpenSearch(SERVICE_URI, use_ssl=True)
+
+def create_client():
+    """Create OpenSearch client."""
+    load_dotenv()
+    SERVICE_URI = os.getenv("SERVICE_URI")
+    if SERVICE_URI == "https://user:pass@hostname:port" or SERVICE_URI is None:
+        raise InvalidServiceURI(
+            f"Update SERVICE_URI to your cluster uri. Current value for SERVICE_URI={SERVICE_URI}"
+        )
+    return OpenSearch(SERVICE_URI, use_ssl=True)
