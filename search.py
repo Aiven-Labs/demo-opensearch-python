@@ -9,11 +9,12 @@ Run the following to check the available methods:
 """
 import typer
 
-from config import INDEX_NAME, SERVICE_URI, client
+from config import INDEX_NAME, create_client
 from helpers import log_titles
 from typing import List
 
 app = typer.Typer()
+
 
 @app.command("match")
 def search_match(field: str, query: str, operator: str = "or") -> None:
@@ -34,10 +35,11 @@ def search_multi_match(fields: List[str], query: str) -> None:
 
 
 @app.command("match-phrase")
-def search_match_phrase(field, query):
+def search_match_phrase(field, phrase, slop=0):
     """Search by match phrase for specific phrases in a field."""
-    typer.echo(f"Searching for {query} in the field {field}")
-    query_body = {"query": {"match_phrase": {field: {"query": query}}}}
+    typer.echo(f"Searching for {phrase} in the field {field}")
+    query_body = {"query": {"match_phrase": {field: {"query": phrase, "slop": slop}}}}
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)
 
