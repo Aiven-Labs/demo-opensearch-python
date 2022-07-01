@@ -11,7 +11,7 @@ import json
 from pprint import pprint
 
 import typer
-from opensearchpy import NotFoundError, helpers, OpenSearch
+from opensearchpy import helpers, OpenSearch
 
 from config import INDEX_NAME, client
 
