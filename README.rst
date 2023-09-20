@@ -6,14 +6,14 @@ This repository contains code examples related to `OpenSearch with Python querie
 Repository structure
 --------------------
 
-* `config.py <https://github.com/aiven/demo-opensearch-python/blob/main/config.py>`_, basic information to connect to the cluster
-* `index.py <https://github.com/aiven/demo-opensearch-python/blob/main/index.py>`_, contains methods that manipulate the index
-* `search.py <https://github.com/aiven/demo-opensearch-python/blob/main/search.py>`_, contains search queries methods
-* `helpers.py <https://github.com/aiven/demo-opensearch-python/blob/main/helpers.py>`_, response handler of search requests
+* `config.py <https://github.com/Aiven-Labs/demo-opensearch-python/blob/main/config.py>`_, basic information to connect to the cluster
+* `index.py <https://github.com/Aiven-Labs/demo-opensearch-python/blob/main/index.py>`_, contains methods that manipulate the index
+* `search.py <https://github.com/Aiven-Labs/demo-opensearch-python/blob/main/search.py>`_, contains search queries methods
+* `helpers.py <https://github.com/Aiven-Labs/demo-opensearch-python/blob/main/helpers.py>`_, response handler of search requests
 
 Dataset
 -------
-You can download the dataset `from Kaggle recipe dataset <https://www.kaggle.com/hugodarwood/epirecipes?select=full_format_recipes.json>`_, and save the ``full_format_recipes.json`` in the current folder of the `demo <https://github.com/aiven/demo-opensearch-python>`_.
+You can download the dataset `from Kaggle recipe dataset <https://www.kaggle.com/hugodarwood/epirecipes?select=full_format_recipes.json>`_, and save the ``full_format_recipes.json`` in the current folder of the `demo <https://github.com/Aiven-Labs/demo-opensearch-python>`_.
 
 Search examples
 ---------------
@@ -66,7 +66,9 @@ Replace your ``SERVICE_URI`` on `.env` file with yours as string::
 
 Do you have questions?
 ----------------------
-Feel free to open an issue with your question on `Issues` or drop me a message at laysa.uchoa@aiven.com
+Feel free to open an issue with your question on `Issues` or ask a question on the `Aiven community forum`_
+
+.. _`Aiven community forum`: https://aiven.io/community/forum/
 
 
 License
