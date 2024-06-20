@@ -13,7 +13,7 @@ from pprint import pprint
 import typer
 from opensearchpy import helpers, OpenSearch
 
-from config import INDEX_NAME, client
+from config import INDEX_NAME, create_client
 
 
 app = typer.Typer()
@@ -34,6 +34,7 @@ def load_data():
 
     data = load_data()
     print(f"Ingesting {INDEX_NAME} data")
+    client = create_client()
     response = helpers.bulk(client, data)
     print(f"Data sent to your OpenSearch with response: {response}")
 
@@ -41,12 +42,14 @@ def load_data():
 @app.command("delete-index")
 def delete_index(index_name=INDEX_NAME):
     """Delete all the documents of certain index name, and do not raise exceptions"""
+    client = create_client()
     client.indices.delete(index=index_name, ignore=[400, 404])
 
 
 @app.command("get-cluster-info")
 def get_cluster_info():
     """Get information about your OpenSearch cluster"""
+    client = create_client()
     return pprint(OpenSearch.info(client), width=100, indent=1)
 
 
@@ -54,6 +57,7 @@ def get_cluster_info():
 def get_mapping():
     """Retrieve mapping for the index.
     The mapping lists all the fields and their data types."""
+    client = create_client()
 
     # list of all the cluster's indices
     indices = client.indices.get_alias("*").keys()

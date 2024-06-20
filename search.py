@@ -9,17 +9,19 @@ Run the following to check the available methods:
 """
 import typer
 
-from config import INDEX_NAME, SERVICE_URI, client
+from config import INDEX_NAME, create_client
 from helpers import log_titles
 from typing import List
 
 app = typer.Typer()
+
 
 @app.command("match")
 def search_match(field: str, query: str, operator: str = "or") -> None:
     """Perform search by relevance for certain field and query."""
     typer.echo(f"Searching for {query} in the field {field} \n")
     query_body = {"query": {"match": {field: {"query": query, "operator": operator}}}}
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)
 
@@ -29,6 +31,7 @@ def search_multi_match(fields: List[str], query: str) -> None:
     """Perform search by relevance for certain field and query."""
     typer.echo(f"Searching for {query} in the field {fields} \n")
     query_body = {"query": {"multi_match": {"query": query, "fields": fields}}}
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)
 
@@ -38,6 +41,7 @@ def search_match_phrase(field, query):
     """Search by match phrase for specific phrases in a field."""
     typer.echo(f"Searching for {query} in the field {field}")
     query_body = {"query": {"match_phrase": {field: {"query": query}}}}
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)
 
@@ -47,6 +51,7 @@ def search_range(field: str, gte, lte) -> None:
     """Search by specifying a range of values for a field"""
     typer.echo(f"Searching for values in the {field} ranging from {gte} to {lte} \n")
     query_body = {"query": {"range": {field: {"gte": gte, "lte": lte}}}}
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)
 
@@ -67,6 +72,7 @@ def search_fuzzy(field, value, fuzziness) -> None:
             }
         }
     }
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)
 
@@ -85,6 +91,7 @@ def search_query_string(field: str, query: str, size: int) -> None:
             }
         }
     }
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body, size=size)
     log_titles(resp)
 
@@ -94,6 +101,7 @@ def search_slop(field, query, slop):
     """Search by specifying a slop - a distance between search word"""
     typer.echo(f"Searching for {query} with slop value {slop} in the field {field}")
     query_body = {"query": {"match_phrase": {field: {"query": query, "slop": slop}}}}
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)
 
@@ -113,6 +121,7 @@ def search_combined_queries():
             }
         }
     }
+    client = create_client()
     resp = client.search(index=INDEX_NAME, body=query_body)
     log_titles(resp)
 
